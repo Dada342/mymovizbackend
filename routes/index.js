@@ -1,0 +1,19 @@
+var express = require('express');
+var router = express.Router();
+
+//const fetch = require("node-fetch");
+
+const apiKey = process.env.APIKEY
+//console.log(apiKey)
+//const apiKey = "78d1f53d2bfe5093235259edfdbce4a8"
+router.get('/movies', (req, res) => {
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        res.json({ movies: data.results });
+      });
+   });
+
+
+module.exports = router;
